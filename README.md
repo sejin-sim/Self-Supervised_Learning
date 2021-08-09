@@ -1,1 +1,1 @@
-# Self-Supervised_Learning-SSL-
+# Self-Supervised_Learning (SSL)
