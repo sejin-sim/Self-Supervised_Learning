@@ -68,6 +68,8 @@
 > 2. representation(대표성)계산
 > 3. representation(대표성)의 비선형 투영 계산 → representation 자체에서 대조 손실을 구하는 것보다 성능 좋음
 <img src="https://user-images.githubusercontent.com/67107675/128668285-a1c569d8-3011-4136-8625-fcfa18574025.png" width="70%">
+<img src="https://user-images.githubusercontent.com/67107675/128818464-894c7faf-f5c0-4daf-ab48-8cb77f3b89d7.png" width="50%">
+
 
 ### BYOL (Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning)
 - 과정
