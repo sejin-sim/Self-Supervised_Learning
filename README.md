@@ -37,7 +37,7 @@
 - 원래 이미지의 canonical(규정)된 orientation(방향)을 잘 이해해야 한다. → 이미지의 전반적 특징 학습 가능
 - Pros : 적용이 용이
 - Cons 
- > 1. 학습 이미지가 표준성이 있어야 한다.
+ > 1. 학습 이미지가 표준성(ex.중력으로 땅이 바닥에있는)이 있어야 한다.
  > 2. 다른 이미지의 negative가 없기 때문에 충분히 fine-grained(정밀) 하지 않다.
  > 3. 중심 patch 외 8개의 선택지 뿐이라 output space가 적다.
 <img src="https://user-images.githubusercontent.com/67107675/128665562-554addfd-4657-467a-9c91-e01384920f6b.png" width="70%">
