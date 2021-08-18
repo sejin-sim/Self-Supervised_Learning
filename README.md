@@ -19,7 +19,8 @@
 <img src="https://user-images.githubusercontent.com/67107675/128664866-7aa8fed7-794e-4993-a7d3-a99dbfa70939.png" width="70%">
 
 ## Pretext Task 기반
-- 사용자가 새로운 문제를 정의(=pretext task) 및 학습함으로 모델이 데이터 자체에 대한 이해 ↑ → pre-train 되어진 모델을 transfer learning(이전 학습)함으로 downstream task(ex. 분류)를 더 잘 해결할 수 있음
+- Pros : 사용자가 새로운 문제를 정의(=pretext task) 및 학습함으로 모델이 데이터 자체에 대한 이해 ↑ → pre-train 되어진 모델을 transfer learning(이전 학습)함으로 downstream task(ex. 분류)를 더 잘 해결할 수 있음
+- Cons : 각 이미지마다 학습이 진행되서 데이터셋 ↑ 연산량 ↑ → 성능 향상이 어려운
 ### Context Prediction
 - object 부분을 인지하여 공간적 관계를 파악하는 것을 학습
 - Pros : 최초의 자기지도학습 방법으로 object 부분에 대하여 학습하게 하는 직관적인 태스크
@@ -54,22 +55,49 @@
 - 추출된 feature값은 instance간의 유사도 정보가 있을 것이라는 가정에서 시작되며, Positive/Negative pair로 구되어 Positive pair끼리 거리를 좁히고, Negative pair끼리는 거리를 멀리 띄워놓는 것이 학습 원리
 > 1. 같은 image에 서로 다른 augmentation 실행, 두 positive pair의 feature representation은 거리가 가까워(유사해)지도록 학습
 > 2. 다른 image에 서로 다른 augmentation 실행, 두 negative pair의 feature representation은 거리가 멀어지도록 학습
+<img src="https://user-images.githubusercontent.com/67107675/128665947-b436b994-3768-477a-ae26-9b62cc63f2d0.png" width="70%">
 
 
-### MoCo (Momentum contrast for unsupervised visual representation learning)
+### [MoCo (Momentum contrast for unsupervised visual representation learning) - CVPR 2020](https://arxiv.org/pdf/1911.05722.pdf)
+- dictonary 구조로 많은 negative sample 수를 확보하여 성능 향상 & FIFO Memory Queue 사용
 - 과정
-> 1. 데이터를 인코더에 통과시켜 key와 query를 생성
-> 2. query와 매칭되는 key는 유사하게, 매칭되지 않는 key는 차별화 되도록 학습
-> 3. 인코딩된 key들을 queue에 삽입하여 dictionary 구성
+> 0. 하나의 x를 augmentation적용 x^query, x^key로 생성
+> 1. 데이터를 인코더(resnet_에 통과시켜 q(query) & k(key) 생성
+> 2. similiar : query와 매칭되는 key와 유사하게
+> 3. disimilar : 매칭되지 않는 key(dic key)와는 차별화 학습
+> 4. contrastive loss를 계산하여 encoder 갱신, decoder는 momentume update 천천히 갱신
+> 5. 인코딩된 key들을 queue에 삽입하여 dictionary 구성   
+<img src="https://user-images.githubusercontent.com/67107675/129825571-97c1a299-b293-4f38-8214-3727d300bae6.png" width="50%"><img src="https://user-images.githubusercontent.com/67107675/129825721-114854bf-cb87-4e6d-8f08-4e848156d4fc.png" width="50%">
 
-### SimCLR (A simple framework for contrastive learning of visual representations)
+- [MoCo v2(Improved Baselines with Mometum Contrastive Learning)](https://arxiv.org/pdf/2003.04297.pdf) 차이점
+1. MLP 기반의 projection head를 추가
+2. encoder에 들어가는 sample들의 data augmentation 구성을 최적화
+3. cosine learning rate schedule을 추가
+
+- [MoCo v3(An Empirical Study of Training Self-Supervised Vision Transformers) - ICCV 2021](https://arxiv.org/pdf/2104.02057.pdf) 차이점
+1. queue 구조의 dictionary 삭제, 큰 batch size 이용
+2. 기존 projection head + prediction head를 추가= query encoder를 구성
+ > <img src="https://user-images.githubusercontent.com/67107675/129827189-bf557871-2080-4602-ba0f-dfe946e9cddc.png" width="70%">
+
+<br>
+
+### [SimCLR (A simple framework for contrastive learning of visual representations) - ICML 2020](https://arxiv.org/pdf/2002.05709.pdf)
+- Queue 사용 X. batch size를 크게 사용 → 충분한 negative 생성 & 다양한 Data augmentation 기법 활용
 - 과정
 > 1. 원본에서 예제를 무작위로 추출하여 두 번 변환 (random cropping & color distortion)
-> 2. representation(대표성)계산
-> 3. representation(대표성)의 비선형 투영 계산 → representation 자체에서 대조 손실을 구하는 것보다 성능 좋음
-<img src="https://user-images.githubusercontent.com/67107675/128668285-a1c569d8-3011-4136-8625-fcfa18574025.png" width="70%">
-<img src="https://user-images.githubusercontent.com/67107675/128818464-894c7faf-f5c0-4daf-ab48-8cb77f3b89d7.png" width="50%">
+> 2. Resnet(BaseEncoder)을 통해 representation 계산
+> 3. MLP(projection head)를 통해 representation의 비선형 투영 계산
+> 4. Positive pair간의 similarity ↑, negative pair 간의 similarity ↓
+> 5. 확률적 경사하강법을 이용하여 Resnet & MLP 업데이트
+<img src="https://user-images.githubusercontent.com/67107675/129828267-232b1497-14e6-44b2-8bac-91dece3f30e1.png" width="70%">
+<img src="https://user-images.githubusercontent.com/67107675/128668285-a1c569d8-3011-4136-8625-fcfa18574025.png" width="50%">
 
+- [SimCLR v2(Big Self-Supervised Models are Strong Semi-Supervised Learners) - NeurIPS 2020](https://arxiv.org/pdf/2006.10029.pdf) 차이점
+1. ResNet-152 3배 selective kernel(데이터에 따라 kernel_size가 변화) 추가 (기존 : ResNet-50 4배)
+2. projection head의 linear layer 개수 2개 → 3개
+3. Negative example을 최대한 늘리기 위한 memory network를 추가
+
+<br>
 
 ### BYOL (Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning)
 - 과정
@@ -86,5 +114,4 @@
 
 ## 출처
 https://velog.io/@tobigs-gm1/Self-Supervised-Learning#2-%EC%B4%88%EC%B0%BD%EA%B8%B0%EC%9D%98-gan-%EA%B8%B0%EB%B0%98-%EC%9E%90%EA%B8%B0%EC%A7%80%EB%8F%84%ED%95%99%EC%8A%B5
-
 https://daeun-computer-uneasy.tistory.com/37
