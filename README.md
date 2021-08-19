@@ -75,7 +75,7 @@
 3. cosine learning rate schedule을 추가
 
 - [MoCo v3(An Empirical Study of Training Self-Supervised Vision Transformers) - ICCV 2021](https://arxiv.org/pdf/2104.02057.pdf) 차이점
-1. queue 구조의 dictionary 삭제, 큰 batch size 이용
+1. queue 구조의 dictionary 삭제 및 큰 batch size 이용, ResNet → Vision Transfermers(ViT) 적용
 2. 기존 projection head + prediction head를 추가= query encoder를 구성
  > <img src="https://user-images.githubusercontent.com/67107675/129827189-bf557871-2080-4602-ba0f-dfe946e9cddc.png" width="70%">
 
