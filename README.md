@@ -111,6 +111,22 @@
 > 3. representation을 잘 배우는 것이므로 학습이 끝나면 onlline network의 encoder 제외 나머지는 사용 안함
 <img src="https://user-images.githubusercontent.com/67107675/128669208-3e68df1c-7a3f-4266-85fd-dcf0fd9d98f8.png" width="70%">
 
+<br>
+
+## Self-Supervised learning 논문 흐름
+<img src="https://user-images.githubusercontent.com/67107675/130401941-0880378d-44ef-4280-aa2f-c62ebcc8c220.png" width="100%">
+- Transformer의 등장
+
+<br>
+
+### [VATT (ransformers for Multimodal Self-Supervised Learning from Raw Video, Audio and Text) - Apr 2021](https://arxiv.org/pdf/2104.11178.pdf)
+- Transformer를 이용해 Multimodal Representation을 학습
+> - Input : 비디오 클립, 비디오에 있는 오디오, 비디오 클립에 대한 텍스트 → Multimodel Data (서로 다른 형태의 데이터)
+> - Tokenization & Positional Encoding을 통해 embedding vector로 Projection → Transformer Encoder
+> - Output : Multimodal representation, 비디오 프레임에 부합하는 프레임-오디오, 프레임-텍스트
+- Task : Video action recognition & Audio event classification (SOTA Score) + Zero-shot video retrieval, Image classification
+<img src="https://user-images.githubusercontent.com/67107675/130402410-53ec8958-2cec-4abc-93a1-fb8c56890829.png" width="100%">
+
 
 ## 출처
 https://velog.io/@tobigs-gm1/Self-Supervised-Learning#2-%EC%B4%88%EC%B0%BD%EA%B8%B0%EC%9D%98-gan-%EA%B8%B0%EB%B0%98-%EC%9E%90%EA%B8%B0%EC%A7%80%EB%8F%84%ED%95%99%EC%8A%B5
