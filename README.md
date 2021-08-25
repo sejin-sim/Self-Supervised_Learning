@@ -119,7 +119,7 @@
 
 <br>
 
-### [VATT (ransformers for Multimodal Self-Supervised Learning from Raw Video, Audio and Text) - Apr 2021](https://arxiv.org/pdf/2104.11178.pdf)
+### [VATT (Transformers for Multimodal Self-Supervised Learning from Raw Video, Audio and Text) - Apr 2021](https://arxiv.org/pdf/2104.11178.pdf)
 - Transformer를 이용해 Multimodal Representation을 학습
 > - Input : 비디오 클립, 비디오에 있는 오디오, 비디오 클립에 대한 텍스트 → Multimodel Data (서로 다른 형태의 데이터)
 > - Tokenization & Positional Encoding을 통해 embedding vector로 Projection → Transformer Encoder
@@ -127,6 +127,19 @@
 - Task : Video action recognition & Audio event classification (SOTA Score) + Zero-shot video retrieval, Image classification
 <img src="https://user-images.githubusercontent.com/67107675/130402410-53ec8958-2cec-4abc-93a1-fb8c56890829.png" width="100%">
 
+<br>
+
+### [EsViT (Efficient Self-supervised Vision Transformers for Representation Learning) - Jun 2021](https://arxiv.org/pdf/2106.09785v1.pdf)
+- Multi-stage transformer 사용 visual representation 학습 
+- S.A.(Sparse Self-Attention) 활용하여 계산 복잡성 ↓ &  모델 표현력을 유지
+- 손실 함수 최소화를 위해 지식 증류 사용
+- 과정
+> 1. Input Image argumentation하여 view set 생성
+> 2. patch 사이즈에 따라 위에는 글로벌 토큰. 아래는 로칼 토큰으로 각쌍을 생성하여 손실함수를 구함
+- Task : Image Classification(SOTA score)
+<img src="https://user-images.githubusercontent.com/67107675/130743910-5fddee75-e74b-4217-ba33-b9060ca3b3f9.png" width="100%">
+
+<br>
 
 ## 출처
 https://velog.io/@tobigs-gm1/Self-Supervised-Learning#2-%EC%B4%88%EC%B0%BD%EA%B8%B0%EC%9D%98-gan-%EA%B8%B0%EB%B0%98-%EC%9E%90%EA%B8%B0%EC%A7%80%EB%8F%84%ED%95%99%EC%8A%B5
