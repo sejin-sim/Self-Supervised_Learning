@@ -21,7 +21,15 @@
 ## Pretext Task 기반
 - Pros : 사용자가 새로운 문제를 정의(=pretext task) 및 학습함으로 모델이 데이터 자체에 대한 이해 ↑ → pre-train 되어진 모델을 transfer learning(이전 학습)함으로 downstream task(ex. 분류)를 더 잘 해결할 수 있음
 - Cons : 각 이미지마다 학습이 진행되서 데이터셋 ↑ 연산량 ↑ → 성능 향상이 어려운
-### Context Prediction
+
+### [Exemplar-CNN - NIPS 2014](https://arxiv.org/pdf/1406.6909v1.pdf)
+- 이미지에서 분할 추출(=seed patch)하여 transformation(변형) 한 뒤, 다른 종류의 여러 seed 중 같은 원본 seed를 고르게 학습
+- Pros : N개의 exemplar에 N개의 클래스 존재 → fine-grained(세밀한) 정보 보존 가능
+- Cons : N개의 exemplar에 N개의 클래스 존재 → 파라미터 수 ↑ & 소요 시간 ↑
+<img src="https://user-images.githubusercontent.com/67107675/128666141-ea1ef6af-4a57-4433-adfd-c7b15430b941.png">
+<img src="https://user-images.githubusercontent.com/67107675/128665947-b436b994-3768-477a-ae26-9b62cc63f2d0.png" width="70%">
+
+### [Context Prediction - ICCV 2015](https://arxiv.org/pdf/1505.05192.pdf)
 - object 부분을 인지하여 공간적 관계를 파악하는 것을 학습
 - Pros : 최초의 자기지도학습 방법으로 object 부분에 대하여 학습하게 하는 직관적인 태스크
 - Cons
@@ -30,11 +38,11 @@
  > 3. 중심 patch 외 8개의 선택지 뿐이라 output space가 적다.
  <img src="https://user-images.githubusercontent.com/67107675/128665052-2a5fec95-c81a-4b04-9e73-55a6384336cb.png" width="70%">
 
-### Jigsaw puzzles
+### [Jigsaw puzzles - ECCV 2016](https://arxiv.org/pdf/1603.09246.pdf)
 - 이미지를 패치로 분할하고 순서를 바꾼다. 네트워크가 순서를 예측하는 것이 목표
  <img src="https://user-images.githubusercontent.com/67107675/128665491-851a9f91-dd63-4d03-84cd-7898310bc4a1.png" width="70%">
 
-### Rotation prediction
+### [Rotation prediction - ICLR 2018](https://arxiv.org/pdf/1803.07728.pdf)
 - 원래 이미지의 canonical(규정)된 orientation(방향)을 잘 이해해야 한다. → 이미지의 전반적 특징 학습 가능
 - Pros : 적용이 용이
 - Cons 
@@ -43,13 +51,6 @@
  > 3. 중심 patch 외 8개의 선택지 뿐이라 output space가 적다.
 <img src="https://user-images.githubusercontent.com/67107675/128665562-554addfd-4657-467a-9c91-e01384920f6b.png" width="70%">
 <img src="https://user-images.githubusercontent.com/67107675/128665720-d08cb140-df84-44c7-bbe1-46456ff375c6.png" width="70%">
-
-### Exemplar ConvNets
-- 이미지에서 분할 추출(=seed patch)하여 transformation(변형) 한 뒤, 다른 종류의 여러 seed 중 같은 원본 seed를 고르게 학습
-- Pros : N개의 exemplar에 N개의 클래스 존재 → fine-grained(세밀한) 정보 보존 가능
-- Cons : N개의 exemplar에 N개의 클래스 존재 → 파라미터 수 ↑ & 소요 시간 ↑
-<img src="https://user-images.githubusercontent.com/67107675/128666141-ea1ef6af-4a57-4433-adfd-c7b15430b941.png">
-<img src="https://user-images.githubusercontent.com/67107675/128665947-b436b994-3768-477a-ae26-9b62cc63f2d0.png" width="70%">
 
 ## Contrastive learning (대조 학습)
 - 추출된 feature값은 instance간의 유사도 정보가 있을 것이라는 가정에서 시작되며, Positive/Negative pair로 구되어 Positive pair끼리 거리를 좁히고, Negative pair끼리는 거리를 멀리 띄워놓는 것이 학습 원리
