@@ -5,6 +5,12 @@
 - 필요성 : 지도학습은 강력하지만 많은 양의 레이블링된 데이터 필요 → 시간 및 비용 소모 多
 - Pretext Task : 사용자가 정의한 문제 (ex. Downstream Task를 위해 시각적 특징을 배우는 단계)
 - Downstream Task : SSL로 학습된 features들이 잘 학습되었는지 판단하며, 최종적으로 이루고자하는 task (ex. 분류)
+- 사용자가 정의한 새로운 문제(pretext task)를 네트워크에 학습 시켜서 데이터 자체에 대한 이해도를 높임 = pre-traning 
+
+  ㄴ pretext task 성능 확인 : pretraining 이후 모든 weight들을 freeze. 얼마나 feature를 잘 뽑는지, representation을 얼마나 잘 배웠는지 확인
+- pretraing 이후 전이 학습(transfer learning)을 통해 최종적으로 이루고자하는 문제(downstream task)를 해결 = fine-tuning
+
+  ㄴ fine-tuning : 기존 학습된 모델 기반 프레임워크를 새로운 목적에 맞게 변형하고 이미 학습된 모델 weight로부터 학습을 업데이트
 
 ## GAN 기반
 - 단점 : 픽셀 단위로 복원 or 예측하기에 계산 복잡도 높다
