@@ -45,8 +45,11 @@
  <img src="https://user-images.githubusercontent.com/67107675/128665052-2a5fec95-c81a-4b04-9e73-55a6384336cb.png" width="70%">
 
 ### [Jigsaw puzzles - ECCV 2016](https://arxiv.org/pdf/1603.09246.pdf)
-- 이미지를 패치로 분할하고 순서를 바꾼다. 네트워크가 순서를 예측하는 것이 목표
+- 이미지를 패치로 분할하고 순서를 바꾼다. 네트워크가 parts들의 위치를 잘 파악해서 순서를 예측하는 것이 목표
+- CFN(context-free network) 구조 제시 : siamese-ennead CNN
  <img src="https://user-images.githubusercontent.com/67107675/128665491-851a9f91-dd63-4d03-84cd-7898310bc4a1.png" width="70%">
+ <img src="https://user-images.githubusercontent.com/67107675/154222052-4133ba74-45f0-426e-af59-5ade45a3643f.png" width="70%">
+
 
 ### [Rotation prediction - ICLR 2018](https://arxiv.org/pdf/1803.07728.pdf)
 - 원래 이미지의 canonical(규정)된 orientation(방향)을 잘 이해해야 한다. → 이미지의 전반적 특징 학습 가능
